@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea
+*.iml
+target
+.idea/*
+logs
+./backend/gome-axwl-fc/.gitignore
+*vcs.xml
+data
