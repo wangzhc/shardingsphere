@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.orm.OrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.entity.pojo.Order">
+        <result column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `order_id`,
+        `user_id`,
+        `description`,
+        `create_time`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.orderId">
+        INSERT INTO order (
+            `order_id`,
+            `user_id`,
+            `description`,
+            `create_time`
+        ) VALUES (
+            #{pojo.orderId},
+            #{pojo.userId},
+            #{pojo.description},
+            #{pojo.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.orderId">
+        INSERT INTO order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.orderId!=null"> `order_id`,</if>
+            <if test="pojo.userId!=null"> `user_id`,</if>
+            <if test="pojo.description!=null"> `description`,</if>
+            <if test="pojo.createTime!=null"> `create_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.orderId!=null">#{pojo.orderId},</if>
+            <if test="pojo.userId!=null">#{pojo.userId},</if>
+            <if test="pojo.description!=null">#{pojo.description},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO order (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.orderId},
+            #{pojo.userId},
+            #{pojo.description},
+            #{pojo.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE order
+        <set>
+            <if test="pojo.orderId != null"> `order_id` = #{pojo.orderId}, </if>
+            <if test="pojo.userId != null"> `user_id` = #{pojo.userId}, </if>
+            <if test="pojo.description != null"> `description` = #{pojo.description}, </if>
+            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime} </if>
+        </set>
+        WHERE order_id = #{pojo.orderId}
+    </update>
+
+    <select id="queryList" resultMap="AllColumnMap">
+        SELECT
+        o.*
+        FROM `order` o
+        JOIN `order_item` i ON o.`order_id`=i.`order_id`
+        WHERE
+        o.`user_id` IN(313033578071982081, 313033580894748672)
+        AND o.`order_id` IN(313255111704969217, 313256288563757057)
+        AND i.`user_id` IN(313033578071982081, 313033580894748672)
+        AND i.`order_id` IN(313255111704969217, 313256288563757057)
+        LIMIT 20
+    </select>
+
+</mapper>
+
