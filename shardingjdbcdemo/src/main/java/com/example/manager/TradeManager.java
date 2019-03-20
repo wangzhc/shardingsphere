@@ -15,8 +15,8 @@ public class TradeManager{
     private TradeMapper tradeMapper;
 
     public int insert(Trade pojo){
-        long id = IdGenerateUtil.getSnowId();
-        pojo.setId(id);
+        //long id = IdGenerateUtil.getSnowId();
+        //pojo.setId(id);
         return tradeMapper.insert(pojo);
     }
 
@@ -38,7 +38,7 @@ public class TradeManager{
         return tradeMapper.update(pojo);
     }
 
-    public List<Trade> queryList(Long minUserId, Long maxUserId, Long start){
-        return tradeMapper.queryList(minUserId, maxUserId, start);
+    public List<Trade> queryList(Long start){
+        return tradeMapper.queryList(start);
     }
 }

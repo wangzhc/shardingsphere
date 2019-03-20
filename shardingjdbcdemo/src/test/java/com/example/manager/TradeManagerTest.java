@@ -4,9 +4,13 @@ import com.example.BaseTest;
 import com.example.common.util.IdGenerateUtil;
 import com.example.entity.pojo.Trade;
 import com.example.shardingsphere.precise.TradeShardingAlgorithm;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +21,8 @@ import java.util.Random;
  * @date 2019/3/18
  */
 public class TradeManagerTest extends BaseTest {
+
+    private static Logger logger = LoggerFactory.getLogger(TradeManagerTest.class);
 
     @Autowired
     private TradeManager tradeManager;
@@ -54,10 +60,11 @@ public class TradeManagerTest extends BaseTest {
     public void insertList() {
         List<Trade> pojos = Lists.newArrayList();
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Trade pojo = new Trade.Builder()
                     //TradeShardingAlgorithm.company_0
-                    .userId(IdGenerateUtil.getSnowId())
+                    //.userId(IdGenerateUtil.getSnowId())
+                    .userId(315127082818469918L)
                     .score(random.nextInt(100))
                     .createTime(new Date())
                     .build();
@@ -68,10 +75,18 @@ public class TradeManagerTest extends BaseTest {
 
     @Test
     public void queryList(){
-        Long minUserId = 313033581150601216L;
-        Long maxUserId = 314446587885519006L;
         Long start = 0L;
-        List<Trade> list = tradeManager.queryList(minUserId, maxUserId, start);
-        System.out.println("listSize=" + list.size());
+        Long pageSize = 10L;
+        List<Trade> list = null;
+        do {
+            list = tradeManager.queryList(start);
+            System.out.println("listSize=" + list.size());
+            if (!CollectionUtils.isEmpty(list)) {
+                for (Trade trade : list) {
+                    System.out.println("userId=" + trade.getUserId() + ", score:" + trade.getScore());
+                }
+            }
+            start += pageSize;
+        } while (!CollectionUtils.isEmpty(list));
     }
 }

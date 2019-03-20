@@ -16,7 +16,5 @@ public interface TradeMapper {
 
     int update(@Param("pojo") Trade pojo);
 
-    List<Trade> queryList(@Param("minUserId") Long minUserId,
-                          @Param("maxUserId") Long maxUserId,
-                          @Param("start") Long start);
+    List<Trade> queryList(@Param("start") Long start);
 }

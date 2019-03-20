@@ -18,21 +18,24 @@
     </sql>
 
     <!--auto generated Code-->
+    <!-- 去掉了id配置才有效：
+      sharding.jdbc.config.sharding.tables.trade.key-generator-class-name=io.shardingsphere.core.keygen.DefaultKeyGenerator
+    -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO trade (
-            `id`,
-            `user_id`,
-            `score`,
-            `create_time`
-        ) VALUES (
-            #{pojo.id},
-            #{pojo.userId},
-            #{pojo.score},
-            #{pojo.createTime}
-        )
-    </insert>
+    <!--`id`, -->
+    `user_id`,
+    `score`,
+    `create_time`
+) VALUES (
+    <!--#{pojo.id}, -->
+    #{pojo.userId},
+    #{pojo.score},
+    #{pojo.createTime}
+)
+</insert>
 
-    <!--auto generated Code-->
+<!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO trade
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,19 +80,19 @@
         WHERE id = #{pojo.id}
     </update>
 
+    <!-- 分片优化主要看sql是否支持优化改写 https://shardingsphere.apache.org/document/legacy/3.x/document/cn/features/sharding/principle/rewrite/ -->
     <select id="queryList" resultMap="AllColumnMap">
         SELECT
         *
         FROM trade
         WHERE
-        <!--
-        <if test="minUserId != null"> `user_id` &gt;= #{minUserId}</if>
-        <if test="maxUserId != null"> AND `user_id` &lt;= #{maxUserId}</if>
-        -->
-        <!-- ORDER BY `score` DESC -->
-        `user_id` IN(313033581150601216, 313033578071982081, 314446587885518853)
-        <!-- 不支持 BETWEEN AND -->
-        <!-- `user_id` BETWEEN 313033581150601216 AND 313033581150601216 LIMIT 0, 10 -->
+        <!-- 不支持 BETWEEN AND --> <!-- `user_id` BETWEEN 313033581150601216 AND 313033581150601216 LIMIT 0, 10 -->
+        <!-- 无分片优化 --> `user_id` &gt;= 315127082818469894 AND `user_id` &lt;= 315127082818469918
+        <!-- 有分片优化 --> <!-- `user_id` = 315127082818469918 -->
+        <!-- 有分片优化 --> <!-- `user_id` IN(315127082818469894, 315127082818469918) -->
+        <!-- 无分片优化 --> <!-- `id` &gt;= 315127082818469994 AND `id` &lt;= 315127082818470018 -->
+        ORDER BY `score` DESC
+        <!-- ORDER BY `user_id` DESC  -->
         LIMIT #{start}, 10
     </select>
 </mapper>
