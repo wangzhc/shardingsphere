@@ -58,7 +58,10 @@
 		<dependency>
 			<groupId>io.shardingsphere</groupId>
 			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-			<version>3.1.0</version>
+			<version>3.0.0</version>
+			<!-- 3.1.0版本: 默认数据源分页有问题 -->
+			<!-- https://gitee.com/llgang-software/sharding-sphere -->
+			<!-- com.example.orm.AloneMapper -->
 		</dependency>
 		<!--<dependency>-->
 			<!--<groupId>io.shardingsphere</groupId>-->

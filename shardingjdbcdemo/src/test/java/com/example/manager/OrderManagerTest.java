@@ -53,8 +53,8 @@ public class OrderManagerTest extends BaseTest {
 
     @Test
     public void queryList() {
-        List<Order> orderList = orderManager.queryList();
-        System.out.println("flagSize =" + orderList.size());
+        List<Order> list = orderManager.queryList();
+        System.out.println("listSize = " + list.size());
     }
 
 }

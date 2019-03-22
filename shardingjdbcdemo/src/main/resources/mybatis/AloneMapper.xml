@@ -76,5 +76,15 @@
         </set>
         WHERE id = #{pojo.id}
     </update>
+
+    <!-- 默认数据源分页存在BUG -->
+    <select id="queryList" resultMap="AllColumnMap">
+        SELECT
+        *
+        FROM alone
+        ORDER BY `score` DESC
+        LIMIT #{start}, #{pageSize}
+    </select>
+
 </mapper>
 

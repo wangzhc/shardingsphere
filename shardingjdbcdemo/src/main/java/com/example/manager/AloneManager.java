@@ -37,4 +37,15 @@ public class AloneManager{
     public int update(Alone pojo){
         return aloneMapper.update(pojo);
     }
+
+    /**
+     * 默认数据源分页存在BUG
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<Alone> queryList(Long start, Long pageSize){
+        return aloneMapper.queryList(start, pageSize);
+    }
+
 }

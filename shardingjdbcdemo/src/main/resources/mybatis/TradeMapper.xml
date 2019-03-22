@@ -23,16 +23,16 @@
     -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO trade (
-    <!--`id`, -->
-    `user_id`,
-    `score`,
-    `create_time`
-) VALUES (
-    <!--#{pojo.id}, -->
-    #{pojo.userId},
-    #{pojo.score},
-    #{pojo.createTime}
-)
+        <!-- `id`, -->
+        `user_id`,
+        `score`,
+        `create_time`
+    ) VALUES (
+        <!-- #{pojo.id}, -->
+        #{pojo.userId},
+        #{pojo.score},
+        #{pojo.createTime}
+    )
 </insert>
 
 <!--auto generated Code-->
