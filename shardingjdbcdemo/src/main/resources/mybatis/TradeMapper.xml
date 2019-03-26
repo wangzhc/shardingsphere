@@ -56,11 +56,14 @@
     <!--auto generated Code-->
     <insert id="insertList">
         INSERT INTO trade (
-        <include refid="all_column"/>
+        <!-- <include refid="all_column"/> -->
+        `user_id`,
+        `score`,
+        `create_time`
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
             (
-            #{pojo.id},
+            <!-- #{pojo.id}, -->
             #{pojo.userId},
             #{pojo.score},
             #{pojo.createTime}

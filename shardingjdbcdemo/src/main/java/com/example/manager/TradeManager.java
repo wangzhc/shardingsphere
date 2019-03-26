@@ -27,10 +27,10 @@ public class TradeManager{
     }
 
     public int insertList(List<Trade> pojos){
-        for(Trade pojo : pojos){
-            long id = IdGenerateUtil.getSnowId();
-            pojo.setId(id);
-        }
+//        for(Trade pojo : pojos){
+//            long id = IdGenerateUtil.getSnowId();
+//            pojo.setId(id);
+//        }
         return tradeMapper.insertList(pojos);
     }
 

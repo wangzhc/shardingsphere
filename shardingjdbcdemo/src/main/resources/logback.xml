@@ -9,8 +9,7 @@
     </encoder>
     </appender>
 
-    <logger name="com.example" level="INFO"/>
+    <logger name="com.example" level="DEBUG"/>
     <logger name="com.example.orm" level="DEBUG"/>
-    <logger name="io.shardingsphere" level="DEBUG"/>
 
 </configuration>

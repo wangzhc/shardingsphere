@@ -60,11 +60,12 @@ public class TradeManagerTest extends BaseTest {
     public void insertList() {
         List<Trade> pojos = Lists.newArrayList();
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             Trade pojo = new Trade.Builder()
+                    //采用默认分布式主键配置作为分片主键存在BUG
                     //TradeShardingAlgorithm.company_0
                     //.userId(IdGenerateUtil.getSnowId())
-                    .userId(315127082818469918L)
+                    .userId(315127082818469919L)
                     .score(random.nextInt(100))
                     .createTime(new Date())
                     .build();

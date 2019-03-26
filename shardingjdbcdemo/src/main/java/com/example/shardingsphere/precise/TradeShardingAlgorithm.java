@@ -27,7 +27,7 @@ public class TradeShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
         if (company.contains(value)) {
             for (String name : collection) {
                 if (name.endsWith("_company")) {
-                    logger.info("精确分片算法:{}", name);
+                    logger.info("精确分片算法:{}, text:_company, value:{}", name, value);
                     return name;
                 }
             }
@@ -37,7 +37,7 @@ public class TradeShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
         String text = "_" + String.valueOf(value % size);
         for (String name : collection) {
             if (name.endsWith(text)) {
-                logger.info("精确分片算法:{}", name);
+                logger.info("精确分片算法:{}, text:{}, value:{}", name, text, value);
                 return name;
             }
         }
